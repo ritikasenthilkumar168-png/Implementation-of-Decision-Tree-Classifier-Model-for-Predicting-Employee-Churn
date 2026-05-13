@@ -22,36 +22,36 @@ To write a program to implement the Decision Tree Classifier Model for Predictin
 ```
 /*
 Program to implement the Decision Tree Classifier Model for Predicting Employee Churn.
-Developed by: E.Ragavan
-RegisterNumber:  212223040160
+Developed by: Ritika S
+RegisterNumber:  212225220086
 */
 import pandas as pd
-data = pd.read_csv("Employee.csv")
-data
-data.head()
-data.info()
-data.isnull().sum()
-data["left"].value_counts
-from sklearn.preprocessing import LabelEncoder
-le= LabelEncoder()
-data["salary"]=le.fit_transform(data["salary"])
-data.head()
-x= data[["satisfaction_level","last_evaluation","number_project","average_montly_hours","time_spend_company","Work_accident","promotion_last_5years","salary"]]
-x.head()
-y=data["left"]
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state = 100)
-from sklearn.tree import DecisionTreeClassifier
-dt = DecisionTreeClassifier(criterion="entropy")
-dt.fit(x_train,y_train)
-y_pred = dt.predict(x_test)
-from sklearn import metrics
-accuracy = metrics.accuracy_score(y_test,y_pred)
-accuracy
-dt.predict([[0.5,0.8,9,260,6,0,1,2]])
-```
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score
+data = pd.read_csv("Employee.csv")
+data = pd.get_dummies(data, drop_first=True)
+X = data.iloc[:, :-1]
+y = data.iloc[:, -1]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))
+plt.figure(figsize=(20,10))
+plot_tree(
+    model,
+    feature_names=X.columns,
+    filled=True
+)
+plt.show()
 
 ### Output:
+<img width="947" height="853" alt="Screenshot 2026-05-13 091754" src="https://github.com/user-attachments/assets/eda3ae8c-2f0e-4d45-b9fe-0d94a01aeeaa" />
+
 ### Data 
 ![image](https://github.com/user-attachments/assets/95f2ff4f-01df-48d4-abac-520fddb42e2f)
 
@@ -59,7 +59,6 @@ dt.predict([[0.5,0.8,9,260,6,0,1,2]])
 ![image](https://github.com/user-attachments/assets/b78946ca-97f6-48c9-ae5d-3b638bd11a35)
 ### Predict
 ![image](https://github.com/user-attachments/assets/510fb3fa-2efd-4fc6-b684-9ffec374000f)
-
 
 ## Result:
 Thus the program to implement the  Decision Tree Classifier Model for Predicting Employee Churn is written and verified using python programming.
