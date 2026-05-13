@@ -48,6 +48,7 @@ plot_tree(
     filled=True
 )
 plt.show()
+```
 ### Output:
 <img width="947" height="853" alt="Screenshot 2026-05-13 091754" src="https://github.com/user-attachments/assets/eda3ae8c-2f0e-4d45-b9fe-0d94a01aeeaa" />
 ## Result:
